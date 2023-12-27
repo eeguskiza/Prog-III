@@ -8,6 +8,7 @@ En este tema, se abordan aspectos relacionados con los Ficheros y las Bases de D
     - `File` y `Path` (`io` / `nio`)
     - `io` es en enfoque tradicional de java a salida y entrada de datos
     - `nio` es new io, que es una mejora de este anterior. 
-2. **Ficheros de texto**
-3. **Ficheros binarios**
-4. **Bases de datos**
+2. **Properties**
+3. **Ficheros de texto**
+4. **Ficheros binarios**
+5. **Bases de datos**
