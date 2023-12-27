@@ -10,6 +10,8 @@ public class FicherosTexto {
     *Una vez seleccionado el archivo, se abre un FileWriter en ese archivo, y se usa para escribir una cadena de texto en el archivo.
     *Al igual que en el ejemplo anterior, se muestra un mensaje de éxito una vez que se ha escrito el texto, o un mensaje de error si ocurre una excepción.
      */
+
+    //El formato mas utilizado segun andoni es xml pero nos la chupa infinito y vamos a hacer txt que es mas facil.
     public static void escribirFichero(String nomFic, List<Persona> listaPersonas) {
         try (BufferedWriter brFich = new BufferedWriter(new FileWriter(new File(nomFic)))) {
             for (Persona persona : listaPersonas) {
