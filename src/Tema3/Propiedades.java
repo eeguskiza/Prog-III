@@ -57,7 +57,7 @@ public class Propiedades extends JFrame {
         // Carga las propiedades o establece valores por defecto si no existen
         try {
             if (Files.exists(Paths.get(PROPERTIES_PATH))) {
-                propiedades.load(new FileInputStream(PROPERTIES_PATH));
+                propiedades.load(new FileInputStream(PROPERTIES_PATH)); // Carga las propiedades desde un archivo
             }
         } catch (IOException io) {
             io.printStackTrace();
@@ -73,7 +73,7 @@ public class Propiedades extends JFrame {
         propiedades.setProperty("alto", String.valueOf(getHeight()));
 
         try (FileOutputStream output = new FileOutputStream(PROPERTIES_PATH)) {
-            propiedades.store(output, "Configuración de la ventana");
+            propiedades.store(output, "Configuración de la ventana"); // Guarda las propiedades en un archivo
             System.out.println("Propiedades guardadas.");
         } catch (IOException io) {
             io.printStackTrace();

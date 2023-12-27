@@ -19,7 +19,7 @@ public class Ficheros {
      */
     public static void claseFile() {
         // File es un objeto que representa un fichero o directorio
-        File archivo = new File("Recursos/fichero.txt");
+        File archivo = new File("src/Recursos/fichero.txt");
 
         // Intenta crear el archivo si no existe
         try {
@@ -68,8 +68,8 @@ public class Ficheros {
     }
 
     public static void ejemploIO() {
-        String inputPath = "Recursos/input.txt"; // Define la ruta del archivo de entrada --> Escibe algo aqui para ver como cambia
-        String outputPath = "Recursos/output.txt"; // Define la ruta del archivo de salida
+        String inputPath = "src/Recursos/input.txt"; // Define la ruta del archivo de entrada --> Escibe algo aqui para ver como cambia
+        String outputPath = "src/Recursos/output.txt"; // Define la ruta del archivo de salida
 
         try (BufferedReader reader = new BufferedReader(new FileReader(inputPath)); // Crea un BufferedReader para leer el archivo
              BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) { // Crea un BufferedWriter para escribir en el archivo
@@ -85,8 +85,8 @@ public class Ficheros {
     }
 
     public static void ejemploNIO() {
-        String inputPath = "Recursos/input.txt"; // Define la ruta del archivo de entrada --> Escibe algo aqui para ver como cambia
-        String outputPath = "Recursos/output.txt"; // Define la ruta del archivo de salida
+        String inputPath = "src/Recursos/input.txt"; // Define la ruta del archivo de entrada --> Escibe algo aqui para ver como cambia
+        String outputPath = "src/Recursos/output.txt"; // Define la ruta del archivo de salida
 
         try {
             List<String> lines = Files.readAllLines(Paths.get(inputPath)); // Lee todas las líneas del archivo de entrada de una vez
