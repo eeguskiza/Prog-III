@@ -27,6 +27,7 @@ import java.sql.*; //Importamos todas las clases de java.sql
  */
 
 public class BasesDeDatos {
+    // PARA MODIFICAR LA BASE executeUpdate y PARA CONSULTAR executeQuery !!!!
 
     public static void consultaSQL() {
         try {
@@ -57,10 +58,102 @@ public class BasesDeDatos {
         }
     }
 
+    public static void insercionSQL(){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
 
+            try (Connection conn = DriverManager.getConnection(url)) { //Lo primero es conectarnos a la base de datos.
+                System.out.println("Conexión a SQLite establecida con éxito.");
+                Statement stmt = conn.createStatement(); //Creamos un objeto Statement para poder ejecutar sentencias SQL.
+                int filasAfectadas = stmt.executeUpdate("INSERT INTO persona (id, nombre, apellido, edad, correo_electronico) VALUES (2, 'Alex', 'Jauregui', 33, 'alex.jauregui@opendeusto.es')"); // Ejecutamos una sentencia SQL y guardamos el número de filas afectadas.
+                System.out.println(filasAfectadas + " filas afectadas.");
+                stmt.close();
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println("Error de conexión: " + e.getMessage());
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se encontró el driver de SQLite: " + e.getMessage());
+        }
+
+    }
+
+    public static void modificacionSQL(){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+            try (Connection conn = DriverManager.getConnection(url)) { //Lo primero es conectarnos a la base de datos.
+                System.out.println("Conexión a SQLite establecida con éxito.");
+                Statement stmt = conn.createStatement(); //Creamos un objeto Statement para poder ejecutar sentencias SQL.
+                int filasAfectadas = stmt.executeUpdate("UPDATE Persona SET edad = 19 WHERE nombre = 'Alex'"); // Ejecutamos una sentencia SQL y guardamos el número de filas afectadas.
+                System.out.println(filasAfectadas + " filas afectadas.");
+                stmt.close();
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println("Error de conexión: " + e.getMessage());
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se encontró el driver de SQLite: " + e.getMessage());
+        }
+    }
+
+    public static void modificacionSQL2(){ //Aqui hacemos uso de prepared statement que ayuda a evitar inyecciones SQL erroneas.
+        try {
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:src/Recursos/SQLite.db"; // Ruta de la base de datos.
+
+            try (Connection conn = DriverManager.getConnection(url)) { // Conexión a la base de datos.
+                System.out.println("Conexión a SQLite establecida con éxito.");
+
+                String sql = "UPDATE Persona SET edad = ? WHERE nombre = ?"; // Sentencia SQL con parámetros.
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // Creación de un PreparedStatement.
+                    pstmt.setInt(1, 19); // Asignar valor al primer parámetro (edad).
+                    pstmt.setString(2, "Alex"); // Asignar valor al segundo parámetro (nombre).
+
+                    int filasAfectadas = pstmt.executeUpdate(); // Ejecutar la sentencia SQL.
+                    System.out.println(filasAfectadas + " filas afectadas.");
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Error de conexión: " + e.getMessage());
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se encontró el driver de SQLite: " + e.getMessage());
+        }
+    }
+
+
+    public static void borradoSQL(){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+            try (Connection conn = DriverManager.getConnection(url)) { //Lo primero es conectarnos a la base de datos.
+                System.out.println("Conexión a SQLite establecida con éxito.");
+                Statement stmt = conn.createStatement(); //Creamos un objeto Statement para poder ejecutar sentencias SQL.
+                int filasAfectadas = stmt.executeUpdate("DELETE FROM Persona WHERE nombre = 'Alex'"); // Ejecutamos una sentencia SQL y guardamos el número de filas afectadas.
+                System.out.println(filasAfectadas + " filas afectadas.");
+                stmt.close();
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println("Error de conexión: " + e.getMessage());
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("No se encontró el driver de SQLite: " + e.getMessage());
+        }
+    }
 
 
     public static void main(String[] args) {
-        conexion();
+        //consultaSQL();
+        //insercionSQL();
+        //modificacionSQL();
+        //modificacionSQL2();
+        //borradoSQL();
     }
 }
