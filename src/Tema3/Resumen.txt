@@ -1,6 +1,0 @@
-En este tema se tratan temas sobre Ficheros y Bases de datos.
-Aqui un pequeño indice:
-• Ficheros: File y Path (io / nio)
-• Ficheros de texto
-• Ficheros binarios: Serializable
-• Bases de datos
