@@ -12,6 +12,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
 - **Tema 4: Recursividad**
 - **Tema 5: Estructuras de Datos**
     - [Ficheros](src/Tema3/Ficheros.java)
+    - [Properties](src/Tema3/Propiedades.java)
 - **Tema 6: Swing**
     - [Ventanas](#ejemplo-swing)
     - [Layouts](#layouts)
