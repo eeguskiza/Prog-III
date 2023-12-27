@@ -11,7 +11,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
     - [Bases de Datos](#bases-de-datos)
 - **Tema 4: Recursividad**
 - **Tema 5: Estructuras de Datos**
-    - [Ficheros](Tema3/Ficheros)
+    - [Ficheros](src/Tema3/Ficheros)
 - **Tema 6: Swing**
     - [Ventanas](#ejemplo-swing)
     - [Layouts](#layouts)
