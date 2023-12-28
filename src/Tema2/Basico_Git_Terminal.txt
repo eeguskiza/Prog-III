@@ -1,0 +1,43 @@
+
+Básicos de Git desde la Terminal
+---------------------------------
+
+1. Configuración Inicial:
+   - Configurar nombre de usuario: `git config --global user.name "Tu Nombre"`
+   - Configurar email: `git config --global user.email "tuemail@example.com"`
+
+2. Crear un Nuevo Repositorio:
+   - Navegar al directorio deseado: `cd ruta/al/directorio`
+   - Inicializar el repositorio: `git init`
+
+3. Clonar un Repositorio Existente:
+   - `git clone url_del_repositorio`
+
+4. Verificar el Estado de tus Archivos:
+   - `git status`
+
+5. Agregar Cambios para el Commit:
+   - Agregar un archivo específico: `git add nombre_del_archivo`
+   - Agregar todos los cambios: `git add .`
+
+6. Hacer un Commit:
+   - `git commit -m "Mensaje del commit"`
+
+7. Ver Historial de Commits:
+   - `git log`
+
+8. Crear y Cambiar a Nuevas Ramas:
+   - Crear una rama: `git branch nombre_de_la_rama`
+   - Cambiar a una rama: `git checkout nombre_de_la_rama`
+
+9. Fusionar Ramas:
+   - Asegurarse de estar en la rama que recibirá los cambios: `git checkout rama_destino`
+   - Fusionar la rama: `git merge nombre_de_la_rama`
+
+10. Actualizar Repositorio Local con los Últimos Cambios:
+    - `git pull`
+
+11. Subir Cambios al Repositorio Remoto:
+    - `git push origin nombre_de_la_rama`
+
+Recuerda siempre verificar el estado de tus archivos con `git status` y mantener un historial de commits limpio y descriptivo.

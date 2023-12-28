@@ -5,6 +5,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
 ## Índice
 - **Tema 1: JUnit y otros**
 - **Tema 2: Git**
+  - [Comandos simples](src/Tema2/Basico_Git_Terminal.txt)
 - **Tema 3: Trabajando con Ficheros y Bases de Datos**
   - [Ficheros](src/Tema3/Ficheros.java)
   - [Properties](src/Tema3/Propiedades.java)
@@ -15,6 +16,9 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
 - **Tema 4: Recursividad**
     - [Funciones recursivas](src/Tema4/Recursividad.java)
 - **Tema 5: Estructuras de Datos**
+    - [Estructuras lineales](src/Tema5/EstructurasLineales.java)
+    - [Mapas](src/Tema5/Mapas.java)
+    - [Estructuras no lineales](src/Tema5/EstructurasNoLineales.java)
 - **Tema 6: Swing**
 
 
