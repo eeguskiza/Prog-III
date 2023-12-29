@@ -240,7 +240,7 @@ public class Compact {
 
     public static void compact10() { //Hay una opcion de crear un jara ejecutable pero es un porro, ya lo metere
         // Crear un archivo ZIP con una clase
-        try (ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream("example.zip"));
+        try (ZipOutputStream zipOut = new ZipOutputStream(new FileOutputStream("src/Recursos/ejemplo.zip"));
              FileInputStream fileIn = new FileInputStream("src/Tema3/Propiedades.java")) {
             ZipEntry zipEntry = new ZipEntry("src/Tema3/Propiedades.java");
             zipOut.putNextEntry(zipEntry);

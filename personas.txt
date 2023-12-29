@@ -1,2 +1,0 @@
-Juan,Perez,20
-Ana,Garcia,30
