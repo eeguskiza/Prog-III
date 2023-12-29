@@ -10,7 +10,8 @@ En este tema, se abordan aspectos relacionados con los Ficheros y las Bases de D
     - `nio` es new io, que es una mejora de este anterior. 
 2. **Properties**
    - `Utilidad y funcionamiento`
-2. **Preferences** --> Falta por hacer
+2. **Preferences** 
+   - `Utilidad y funcionamiento`
 3. **Ficheros de texto**
    - `Escritura de objetos`
    - `Lectura de objetos`
