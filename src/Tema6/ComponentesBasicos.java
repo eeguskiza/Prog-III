@@ -45,6 +45,9 @@ public class ComponentesBasicos extends JFrame {
         JList<String> list = new JList<>(new String[]{"Elemento 1", "Elemento 2", "Elemento 3"});
         add(new JScrollPane(list));
 
+        //Añadiendo JPasswordField
+        add(new JPasswordField(20));
+
         // Configuraciones finales del JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
