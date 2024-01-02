@@ -1,0 +1,130 @@
+----------------------------HILO---------------------------
+HILO:
+addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                 hilo = new Thread() {
+                    public void run() {
+                        while (seguir=true) {
+                            try {
+                            	//escribe aqui
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            cont++;
+                            tiempo.setText(cont + "");
+                            System.out.println(cont);
+                        }
+                    }
+                };
+                hilo.start();
+            }
+
+--------------------------GUARDAR ESPECIALISTAS (CSV) ---------------------------
+public void guardarEspecialistasCSV(String fichero) {
+		try {
+	        PrintWriter writer = new PrintWriter(new File(fichero));
+	        for (Especialista e : listaEspecialistas) {
+	            StringBuilder linea = new StringBuilder();
+
+	            linea.append(e.getNom()).append(";");
+	            linea.append(e.getReparaTV()).append(";");
+	            linea.append(e.getReparaPC()).append(";");
+	            linea.append(e.getReparaMovil()).append(";");
+	            linea.append(e.getBonificacion()).append(";");
+
+	            writer.println(linea.toString());
+	        }
+
+	        writer.close();
+	    } catch (FileNotFoundException e) {
+	        System.err.println("Error al guardar averías");
+	    }
+
+	}
+
+
+-------------------------CARGAR ESPECIALISTAS (CSV) ---------------------------------
+public void cargarEspecialistasCSV(String fichero) {
+		try {
+			Scanner sc = new Scanner(new File(fichero));
+			while (sc.hasNextLine()) {
+				String linea = sc.nextLine();
+				String[] campos = linea.split(";");
+				Especialista e = new Especialista();
+
+				e.setNom(campos[0]);
+				e.setReparaPC(Integer.parseInt(campos[1]));
+				e.setReparaMovil(Integer.parseInt(campos[2]));
+				e.setReparaTV(Integer.parseInt(campos[3]));
+				e.setBonificacion(Double.parseDouble(campos[4]));
+
+				listaEspecialistas.add(e);
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Error al cargar averías");
+		}
+	}
+
+--------------------------------RECORRER UN HASHMAP -------------------------
+for (Map.Entry<Integer, String> entrada : miHashMap.entrySet()) {
+    Integer clave = entrada.getKey();
+    String valor = entrada.getValue();
+    System.out.println("Clave: " + clave + ", Valor: " + valor);
+}
+
+
+----------------------------------CREAR RENDERER CON NOMBRE --------------------------
+DefaultTableCellRenderer rendererTablaProvincias = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                System.out.println(1);
+                return c;
+            }
+        };
+
+tablaDatos.setDefaultRenderer(Object.class, rendererTablaProvincias); //esto donde quieras aplicar el render a esa tabla
+
+--------------------------------RENDER SIN DEFINIRLE NOMBRE ---------------------------------
+tabla.setDefaultRenderer( Object.class, new DefaultTableCellRenderer(){
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+				return c;
+			}
+		});
+
+
+---------------------------- RENDERER PARA JTREE------------------------
+arbol.setCellRenderer(new DefaultTreeCellRenderer(){
+			public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+				Component c = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+
+				return c;
+			}
+		});
+---------------------------------PROGES BAR---------------
+if (column == 2) {
+                    JProgressBar bar = new JProgressBar(5000, 5000000);
+                    bar.setValue((Integer) value);
+                    bar.setStringPainted(true);
+
+                    if (3000000 > (Integer) value) {
+                        bar.setForeground(Color.blue);
+                    } else {
+                        bar.setForeground(Color.red);
+                    }
+
+                    return bar;
+                }
+---------------------------pintar column----------------
+public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if (column==0){
+                    c.setBackground(Color.PINK);
+                }else{
+                    c.setBackground(Color.CYAN);
+                }
