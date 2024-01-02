@@ -31,6 +31,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
     - [Hilos y Concurrencia](src/Tema6/SwingConcurrencyDemo.java)
     - [JTree](src/Tema6/JTreeExample.java)
     - [JTable](src/Tema6/JTableDemo.java)
+    - [Herencias e interfaces](src/Tema6/EjemploHerenciaInterfaces.java)
 
 ## Examenes finales 
 Aqui voy dejando los examenes finales que he resuelto yo, para que podais verlos y estudiarlos.
