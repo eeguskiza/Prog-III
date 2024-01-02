@@ -23,6 +23,8 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
     - [Mapas](src/Tema5/Mapas.java)
     - [Estructuras no lineales](src/Tema5/EstructurasNoLineales.java)
 - **Tema 6: Swing**
+    - [Layouts](src/Tema6/SwingLayouts.java)
+    - [Layouts anidadas](src/Tema6/SwingLayoutsAnidados.java)
 
 ## Examenes finales 
 Aqui voy dejando los examenes finales que he resuelto yo, para que podais verlos y estudiarlos.
