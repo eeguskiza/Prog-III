@@ -101,7 +101,7 @@ public class BasesDeDatos {
         }
     }
 
-    public static void modificacionSQL2(){ //Aqui hacemos uso de prepared statement que ayuda a evitar inyecciones SQL erroneas.
+    public static void modificacionSQL2(){ //Aqui hacemos uso de prepared statement que ayuda a evitar inyecciones SQL erroneas.r
         try {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:src/Recursos/SQLite.db"; // Ruta de la base de datos.

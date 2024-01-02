@@ -1,4 +1,4 @@
-# Tema 2: JUnit y otros
+# Tema 1: JUnit y otros
 
 En este tema, se abordan aspectos relacionados con JUnit y otros. A continuación, se presenta un índice de los subtemas tratados:
 

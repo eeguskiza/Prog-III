@@ -13,7 +13,7 @@ import java.util.Properties;
 
 public class Propiedades extends JFrame {
 
-    private static final String PROPERTIES_PATH = "Recursos/config.xml"; //.xml, .properties, .conf, .cfg --> Hay varios formatos
+    private static final String PROPERTIES_PATH = "src/Recursos/config.dat"; //.xml, .properties, .conf, .cfg --> Hay varios formatos
     private Properties propiedades;
     private JTextField texto;
 

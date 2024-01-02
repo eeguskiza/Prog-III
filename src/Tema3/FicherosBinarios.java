@@ -2,6 +2,7 @@ package Tema3;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.logging.Logger;
 
 /*
 Para leer un archivo en Java, puedes usar varias clases como:
@@ -11,6 +12,7 @@ Dependiendo del tipo de datos que quieras leer (texto, bytes, objetos, etc.), ut
 
 //Ficheros binarios, normalmente utilizada para almacenar objetos. --> UTILIZAREMOS data.dat
 public class FicherosBinarios{
+    protected static Logger logger = Logger.getLogger(FicherosBinarios.class.getName());
     //ESCRITURA DE FICHEROS BINARIOS
     /*
     En este ejemplo, un JFileChooser se utiliza para permitir al usuario seleccionar un archivo para guardar.
@@ -27,9 +29,9 @@ public class FicherosBinarios{
             try (FileOutputStream fileOut = new FileOutputStream(archivo);
                  ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
                 out.writeObject(persona);
-                System.out.println("Datos guardados correctamente.");
+                logger.info(String.format("Datos guardados en el fichero '%s'", archivo.getName()));
             } catch (IOException i) {
-                System.out.println("Error al guardar datos.");
+                logger.warning(String.format("Error al guardar datos en el fichero '%s'", archivo.getName()));
             }
         }
     }
@@ -47,11 +49,12 @@ Si ocurre una excepción durante este proceso, como una IOException o una ClassN
 
             Persona persona = (Persona) in.readObject();
             //Aqui se podria meter logica qu elo añada a un Mapa, Array o lo que sea.
+            logger.info(String.format("Datos leídos del fichero '%s'", archivo.getName()));
             System.out.printf("Nombre: %s\nApellido: %s\nEdad: %d\n", persona.getNombre(), persona.getApellido(), persona.getEdad());
         } catch (IOException i) {
-            System.out.println("Error al leer datos.");
+            logger.warning(String.format("Error al leer datos del fichero '%s'", archivo.getName()));
         } catch (ClassNotFoundException c) {
-            System.out.println("Clase no encontrada.");
+            logger.warning("Clase no encontrada.");
         }
     }
 

@@ -1,4 +1,4 @@
-# Tema 3: Recursividad
+# Tema 4: Recursividad
 
 En este tema, se abordan aspectos relacionados con las funcines recursivas. A continuación, se presenta un índice de los subtemas tratados:
 
