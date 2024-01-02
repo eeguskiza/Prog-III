@@ -28,6 +28,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
     - [Componentes básicos](src/Tema6/SwingComponentesBasicos.java)
     - [Componentes avanzados](src/Tema6/SwingComponentesAvanzados.java)
     - [Eventos](src/Tema6/GestionEventosSwing.java)
+    - [Hilos y Concurrencia](src/Tema6/SwingConcurrencyDemo.java)
 
 ## Examenes finales 
 Aqui voy dejando los examenes finales que he resuelto yo, para que podais verlos y estudiarlos.

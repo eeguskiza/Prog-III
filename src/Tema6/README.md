@@ -53,6 +53,8 @@ En este tema, se abordan aspectos relacionados con Swing y diseño de aplicacion
     - `Personalización de Renderers y Editors`
     - `Modelos de Datos para JTable y Gestión de Datos`
 
-9. **Conclusión y Mejores Prácticas**
-    - `Consejos Generales para el Diseño de Interfaces en Swing`
-    - `Recursos Adicionales y Documentación`
+9. **Herencias e Interfaces**
+    - `Herencia en Java`
+    - `Interfaces en Java`
+    - `Clases Abstractas en Java`
+    - `Uso de Interfaces en Swing`
