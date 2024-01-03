@@ -3,10 +3,10 @@
 Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el material necesario para la asignatura.
 
 ## Índice
-- **Tema 1: JUnit y otros**
+- **Tema 1: Tema1.test.JUnit y otros**
   - [Java compact](src/Tema1/Compact.java)
   - [Sockets](src/Tema1/Sockets)
-  - [JUnit](src/Tema1/JUnit.java)
+  - [Tema1.test.JUnit](src/Tema1/JUnit.java)
 - **Tema 2: Git**
   - [Comandos simples](src/Tema2/Basico_Git_Terminal.txt)
 - **Tema 3: Trabajando con Ficheros y Bases de Datos**
@@ -35,6 +35,7 @@ Bienvenidos al repositorio de Programación III. Aquí encontraréis todo el mat
 
 ## Examenes finales 
 Aqui voy dejando los examenes finales que he resuelto yo, para que podais verlos y estudiarlos.
+- [Ordinaria 2023](https://drive.google.com/drive/folders/1DUkUS8atah2q54Um5P3hIrTKapVKOC0S?usp=sharing)
 
 
 ## Ayuda

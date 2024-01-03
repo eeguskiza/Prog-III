@@ -1,11 +1,13 @@
+package Tema1.test;
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /*
-JUnit es una herramienta de prueba que se utiliza para escribir y ejecutar pruebas automatizadas en el código Java.
+Tema1.test.JUnit es una herramienta de prueba que se utiliza para escribir y ejecutar pruebas automatizadas en el código Java.
 Te permite comprobar si tu código funciona como esperas al realizar pruebas sobre pequeñas partes del mismo,
-denominadas pruebas unitarias. Con JUnit, puedes asegurarte de que los cambios que haces no rompan el comportamiento existente
+denominadas pruebas unitarias. Con Tema1.test.JUnit, puedes asegurarte de que los cambios que haces no rompan el comportamiento existente
 del código, facilitando la detección de errores y mejorando la calidad del software.
  */
 
@@ -16,9 +18,9 @@ del código, facilitando la detección de errores y mejorando la calidad del sof
  */
 
 
-// JUnit 3: Las pruebas heredan de TestCase y deben comenzar con la palabra "test".
-// JUnit 4: Introduce anotaciones como @Test para métodos de prueba, no requiere heredar de TestCase.
-// JUnit 5: Añade más anotaciones y funcionalidades, más modular con Jupiter.
+// Tema1.test.JUnit 3: Las pruebas heredan de TestCase y deben comenzar con la palabra "test".
+// Tema1.test.JUnit 4: Introduce anotaciones como @Test para métodos de prueba, no requiere heredar de TestCase.
+// Tema1.test.JUnit 5: Añade más anotaciones y funcionalidades, más modular con Jupiter.
 
 public class JUnit {
 

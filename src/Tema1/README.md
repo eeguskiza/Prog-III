@@ -1,6 +1,6 @@
-# Tema 1: JUnit y otros
+# Tema 1: Tema1.test.JUnit y otros
 
-En este tema, se abordan aspectos relacionados con JUnit y otros. A continuación, se presenta un índice de los subtemas tratados:
+En este tema, se abordan aspectos relacionados con Tema1.test.JUnit y otros. A continuación, se presenta un índice de los subtemas tratados:
 
 ## Índice
 
@@ -9,5 +9,5 @@ En este tema, se abordan aspectos relacionados con JUnit y otros. A continuació
     - JDate de compact 5 y logger de compact 8 son los impotantes.
     - Compact 10 es interesnate de mirar para saber como hacer un ZIP desde codiogo.
 
-2. **JUnit**
-   - Lo que hay es muy simple, JUnit abarca mas, en los examenes se pueden ver su uso mejor. 
+2. **Tema1.test.JUnit**
+   - Lo que hay es muy simple, Tema1.test.JUnit abarca mas, en los examenes se pueden ver su uso mejor. 
