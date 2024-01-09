@@ -52,7 +52,7 @@ Si ocurre una excepción durante este proceso, como una IOException o una ClassN
             logger.info(String.format("Datos leídos del fichero '%s'", archivo.getName()));
             System.out.printf("Nombre: %s\nApellido: %s\nEdad: %d\n", persona.getNombre(), persona.getApellido(), persona.getEdad());
         } catch (IOException i) {
-            logger.warning(String.format("Error al leer datos del fichero '%s'", archivo.getName()));
+            logger.warning("Error al cargar los datos de el fichero: " + archivo);
         } catch (ClassNotFoundException c) {
             logger.warning("Clase no encontrada.");
         }

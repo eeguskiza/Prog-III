@@ -48,6 +48,12 @@ public class JUnit {
         assertEquals("La resta de 5 y 2 debe ser 3", 3, operacion.resta(5, 2));
     }
 
+    //ejemplo assert true
+    @Test
+    public void testAssertTrue() {
+        // Comprobamos que la resta funcione correctamente
+        assertTrue("La resta de 5 y 2 debe ser 3", 3==operacion.resta(5, 2));
+    }
 
     // Clase de ejemplo que vamos a probar
     // Debes reemplazar esto con tu propia clase y métodos.
