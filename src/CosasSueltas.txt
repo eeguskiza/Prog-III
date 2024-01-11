@@ -1,5 +1,5 @@
 ----------------------------HILO---------------------------
-HILO:
+HILO EN VENTANA:
 addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -21,10 +21,28 @@ addWindowListener(new WindowListener() {
                 hilo.start();
             }
 
+  HILO SIMPLE BOTON:
+  private void iniciarTareaSimple() {
+          // Iniciar un hilo simple
+          new Thread(() -> {
+              boton.setEnabled(false); // Deshabilitar el botón mientras la tarea está en ejecución
+              try {
+                  textArea.append("Tarea simple en progreso...(100%)\n");
+                  for (int i = 0; i < 10; i++) {
+                      Thread.sleep(500); // Simular una tarea larga
+
+                  }
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
+              startSimpleTaskButton.setEnabled(true); // Re-habilitar el botón una vez completada la tarea
+          }).start();
+      }
+
 --------------------------GUARDAR ESPECIALISTAS (CSV) ---------------------------
-public void guardarEspecialistasCSV(String fichero) {
+public void guardarFicheroCSV(String fichero) {
 		try {
-	        PrintWriter writer = new PrintWriter(new File(fichero));
+	        PrintWriter writer = new PrintWriter(new File(fichero)); //Metemos la direccion del fichero
 	        for (Especialista e : listaEspecialistas) {
 	            StringBuilder linea = new StringBuilder();
 
@@ -38,15 +56,17 @@ public void guardarEspecialistasCSV(String fichero) {
 	        }
 
 	        writer.close();
+	        logger.info("CSV creado correctamente en: " + fichero);
 	    } catch (FileNotFoundException e) {
-	        System.err.println("Error al guardar averías");
+	        logger.warning("Error al guardar CSV");
+	        e.printStackTrace();
 	    }
 
 	}
 
 
 -------------------------CARGAR ESPECIALISTAS (CSV) ---------------------------------
-public void cargarEspecialistasCSV(String fichero) {
+public void cargarFicheroCSV(String fichero) {
 		try {
 			Scanner sc = new Scanner(new File(fichero));
 			while (sc.hasNextLine()) {
@@ -62,10 +82,56 @@ public void cargarEspecialistasCSV(String fichero) {
 
 				listaEspecialistas.add(e);
 			}
+			logger.info(CSV cargado correctamente");
 		} catch (FileNotFoundException e) {
-			System.err.println("Error al cargar averías");
+			logger.warning("Error al cargar CSV");
+			e.printStackTrace();
 		}
 	}
+
+
+------------------GUARDAR ESPECIALISTAS (VERSION BINARIA)  ----------------------
+public void guardarFicheroBinario(String fichero) {
+    File archivo = new File(fichero);
+
+    try (FileOutputStream fileOut = new FileOutputStream(archivo);
+         ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+
+
+        // Lógica para escribir el objeto --> Si hiciara falta bucle se pone
+        // out.writeObject(persona)
+
+        logger.info(String.format("Datos guardados en el fichero '%s'", archivo.getName()));
+    } catch (FileNotFoundException e) {
+        logger.severe(String.format("El fichero '%s' no se encontró y no pudo ser creado.", archivo.getName()));
+    } catch (NotSerializableException e) {
+        logger.severe(String.format("El objeto a guardar en '%s' no implementa Serializable.", archivo.getName()));
+    } catch (SecurityException e) {
+        logger.warning(String.format("Error al guardar datos en el fichero '%s'", archivo.getName()));
+    }
+}
+
+
+-------------------------------CARGAR ESPECIALISTAS (VERSION FOS/OOS)------------------
+	public static void leerFicheroBinario(String fichero) {
+            File archivo = new File(fichero);
+
+            try (FileInputStream fileIn = new FileInputStream(archivo);
+                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
+
+                Persona persona = (Persona) in.readObject();
+                //Aqui se podria meter logica que lo añada a un Mapa, Array o lo que sea.
+
+                logger.info(String.format("Datos leídos del fichero '%s'", archivo.getName()));
+            } catch (IOException i) {
+                logger.warning("Error al cargar los datos de el fichero: " + archivo);
+            } catch (ClassNotFoundException c) {
+                logger.warning("Clase no encontrada.");
+            }catch (Exception e) { //por si salta error y no es ninguno de los otros
+                logger.warning("Error no esperado: " + e.getMessage());
+            }
+        }
+
 
 --------------------------------RECORRER UN HASHMAP -------------------------
 for (Map.Entry<Integer, String> entrada : miHashMap.entrySet()) {
@@ -106,25 +172,222 @@ arbol.setCellRenderer(new DefaultTreeCellRenderer(){
 				return c;
 			}
 		});
----------------------------------PROGES BAR---------------
-if (column == 2) {
-                    JProgressBar bar = new JProgressBar(5000, 5000000);
-                    bar.setValue((Integer) value);
-                    bar.setStringPainted(true);
 
-                    if (3000000 > (Integer) value) {
-                        bar.setForeground(Color.blue);
-                    } else {
-                        bar.setForeground(Color.red);
+---------------------------COMANDOS BBDD------------------------------------
+    public static void consultaSQL() {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+                try (Connection conn = DriverManager.getConnection(url)) { //Lo primero es conectarnos a la base de datos.
+                    logger.info("Conexión a SQLite establecida con éxito.");
+                    Statement stmt = conn.createStatement(); //Creamos un objeto Statement para poder ejecutar sentencias SQL.
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM Persona"); //Ejecutamos una sentencia SQL y guardamos el resultado.
+
+                    while (rs.next()) { //Recorremos el resultado, acordarse que seguimos recorriendonos la tabla por filas
+                        System.out.println(rs.getInt("id") + "\t" +
+                                rs.getString("nombre") + "\t" +
+                                rs.getString("apellido") + "\t" +
+                                rs.getInt("edad") + "\t" +
+                                rs.getString("correo_electronico"));
                     }
+                    rs.close();
+                    stmt.close();
+                    conn.close();
 
-                    return bar;
+                    logger.info("Consukta realizada correctamente");
+                } catch (SQLException e) {
+                    logger.warning("Error de conexión: " + e.getMessage());
                 }
----------------------------pintar column----------------
-public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (column==0){
-                    c.setBackground(Color.PINK);
-                }else{
-                    c.setBackground(Color.CYAN);
+            } catch (ClassNotFoundException e) {
+                logger.warning("No se encontró el driver de SQLite: " + e.getMessage());
+            }
+        }
+
+    public static void insercionSQL(){
+            try {
+                Class.forName("org.sqlite.JDBC");
+                String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+                String sql = "INSERT INTO persona (id, nombre, apellido, edad, correo_electronico) VALUES (?, ?, ?, ?, ?); // Sentencia SQL con parámetros.
+
+                      try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // Creación de un PreparedStatement.
+                          pstmt.setInt(1, 19); // Asignar valor al primer parámetro (edad).
+                          pstmt.setString(2, "Alex"); // Asignar valor al segundo parámetro (nombre).
+
+                          int filasAfectadas = pstmt.executeUpdate(); // Ejecutar la sentencia SQL.
+                          logger.info(filasAfectadas + " filas afectadas.");
+                      }
+
+                      logger.info("Insercion correcta en BBDD");
+                } catch (SQLException e) {
+                    logger.warning("Error de conexión: " + e.getMessage());
                 }
+            } catch (ClassNotFoundException e) {
+                logger.warning("No se encontró el driver de SQLite: " + e.getMessage());
+            }
+
+        }
+
+    public static void actualizacionSQL(){
+            try {
+                Class.forName("org.sqlite.JDBC");
+                String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+                String sql = "UPDATE Persona SET edad = ? WHERE nombre = ?"; // Sentencia SQL con parámetros.
+
+                      try (PreparedStatement pstmt = conn.prepareStatement(sql)) { // Creación de un PreparedStatement.
+                          pstmt.setInt(1, 19); // Asignar valor al primer parámetro (edad).
+                          pstmt.setString(2, "Alex"); // Asignar valor al segundo parámetro (nombre).
+
+                          int filasAfectadas = pstmt.executeUpdate(); // Ejecutar la sentencia SQL.
+                          System.out.println(filasAfectadas + " filas afectadas.");
+                      }
+
+                } catch (SQLException e) {
+                    System.out.println("Error de conexión: " + e.getMessage());
+                }
+            } catch (ClassNotFoundException e) {
+                System.out.println("No se encontró el driver de SQLite: " + e.getMessage());
+            }
+
+        }
+
+     public static void borradoSQL(){
+            try {
+                Class.forName("org.sqlite.JDBC");
+                String url = "jdbc:sqlite:src/Recursos/SQLite.db"; //Ruta de la base de datos.
+
+                try (Connection conn = DriverManager.getConnection(url)) { //Lo primero es conectarnos a la base de datos.
+                    logger.info("Conexión a SQLite establecida con éxito.");
+                    Statement stmt = conn.createStatement(); //Creamos un objeto Statement para poder ejecutar sentencias SQL.
+                    int filasAfectadas = stmt.executeUpdate("DELETE FROM Persona WHERE nombre = 'Alex'"); // Ejecutamos una sentencia SQL y guardamos el número de filas afectadas.
+                    logger.info(filasAfectadas + " filas afectadas.");
+                    stmt.close();
+                    conn.close();
+
+                } catch (SQLException e) {
+                    logger.warning("Error de conexión: " + e.getMessage());
+                }
+            } catch (ClassNotFoundException e) {
+                logger.warning("No se encontró el driver de SQLite: " + e.getMessage());
+            }
+        }
+
+
+
+-------------------------- GURDAR FICHERO .TXT --------------------------------
+public void printBoardingPass(Reservation reservation, BoardingPass boardingPass) {
+
+		String stringAux = "ruta.txt";
+        Date now = new Date();
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd - HH:mm"); //esto es mas especifico
+		String.valueOf(fecha) //esto es mas simple peor no siempre va
+
+		String formattedDate = format.format(now); // Esto resultará en una cadena como "2024/01/11 - 15:29"
+        String dateToString = String.valueOf(now); // como "Fri Jan 11 15:29:37 GMT 2024"
+
+		try(PrintWriter printWriter = new PrintWriter(new FileWriter(stringAux, true))){
+			//Date.Time    Locator
+			stringAux = "DATE-TIME: "+format.format(new Date(boardingPass.getDate()))+"\t\tLOCATOR: "+ boardingPass.getLocator();
+			printWriter.println(stringAux);
+
+			stringAux = "FLIGHT: "+ reservation.getFlight().getCode()+"\t\t\t\tFROM "+reservation.getFlight().getOrigin().getCode()+" TO "+ reservation.getFlight().getDestination().getCode();
+			printWriter.println(stringAux);
+
+			stringAux = "PASSANGER: "+boardingPass.getPassenger() + "\t\tSEAT: "+boardingPass.getSeat();
+			printWriter.println(stringAux);
+
+			logger.info("Printing Boarding Pass... + ("+boardingPass+")");
+
+		}catch (Exception ex){
+			logger.warning("Cannot print your boarding pass: "+ ex.getMessage());
+		}
+	}
+
+public static void escribirFichero(String nomFic, List<Persona> listaPersonas) {
+        try (BufferedWriter brFich = new BufferedWriter(new FileWriter(new File(nomFic)))) {
+            for (Persona persona : listaPersonas) {
+                // Formato: nombre,apellido,edad
+                String linea = persona.getNombre() + "," + persona.getApellido() + "," + persona.getEdad();
+                brFich.write(linea);
+                brFich.newLine(); // Para separar cada persona en una nueva línea
+            }
+            logger.info("Archivo escrito correctamente.");
+        } catch (IOException e) {
+            logger.warning("Error al escribir el archivo.");
+            e.printStackTrace();
+        }
+    }
+
+---------------------------------------LEER FICHERO TXT-----------------------------------------
+public static void leerFichero(String ruta){
+        File archivo = new File(ruta);
+        try {
+            FileReader reader = new FileReader(archivo);//Arriba el proceso de el buffer esta en una sola linea compacto.
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] partes = line.split(",");
+                String nombre = partes[0];
+                String apellido = partes[1];
+                int edad = Integer.parseInt(partes[2]);
+                Persona usuario = new Persona(nombre, apellido, edad);
+                System.out.println(usuario); // Imprime el objeto usuario
+            }
+            reader.close();
+            logger.info("Archivo leído correctamente.");
+        } catch (IOException e) {
+            logger.warning("Error al leer el archivo.");
+        }
+    }
+
+
+----------------------- KEY LISTENER -------------------------------------
+taChat.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					taChat.setText(taChat.getText().replace("\\s", "")); //Quito lo intros y los dejo como espacion
+					gestor.nuevoChat(nConversacionUsandose); //Esto coge el texto de la casilla y hace todas las gesitones automaticamente
+				}
+			}
+		});
+
+
+
+----------------------------------JUnit----------------------------------
+    // Variable que mantendrá el objeto a probar en los atributos de la clase
+    private Operacion operacion;
+
+    // El método anotado con @Before se ejecuta antes de cada método de prueba, para crear nuestro entorno.
+    @Before
+    public void setUp() {
+        // Inicialización del objeto Operacion antes de cada prueba
+        operacion = new Operacion();
+    }
+
+    // El método anotado con @Test es un método de prueba.
+    @Test
+    public void testLoquesea() {
+    //Clasicos
+        assertEquals("Mensaje", 5, operacion.sumar(2, 3)); //Estructura --> (mensaje, expected, metodo)
+        assertTrue("El número debe ser positivo", operacion.esPositivo(1)); //Estructura --> (mensaje, expected, metodo)
+        assertFalse("El número no debe ser positivo", operacion.esPositivo(-1)); //Estructura --> (mensaje, expected, metodo)
+
+    //No tan clasicos
+        assertNull("El objeto debería ser nulo", objeto);
+        assertNotNull("El objeto no debería ser nulo", objeto);
+
+    //Raros de ver (Andoni nidecoña)
+    assertSame("Deberían ser la misma referencia", objeto, mismaReferencia); //Estructura --> (mensaje, objeto1, objeto2)
+    assertNotSame("No deberían ser la misma referencia", objetoA, objetoB); //Estructura --> (mensaje, objeto1, objeto2)
+
+    int[] esperado = {1, 2, 3};
+    int[] actual = {1, 2, 3};
+    assertArrayEquals("Los arrays deberían ser iguales", esperado, actual);
+    }
+
+
